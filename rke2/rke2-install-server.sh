@@ -5,7 +5,7 @@ RKE2_VERSION=${RKE2_VERSION:-"v1.26.8+rke2r1"}
 RKE2_SERVER=${RKE2_SERVER:-}
 RKE2_TOKEN=${RKE2_TOKEN:-}
 TLS_SAN=${TLS_SAN:-}
-CONTROL_PLANE_DEDICATED=${CONTROL_PLANE_DEDICATED:-true}
+CONTROL_PLANE_DEDICATED=${CONTROL_PLANE_DEDICATED:-"true"}
 
 function banner () {
   echo "RKE2 server installer -- github.com/aramcap/rancher"
