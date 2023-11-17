@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-RKE2_VERSION="v1.26.8+rke2r1"
-RKE2_SERVER=""
-RKE2_TOKEN=""
+RKE2_VERSION=${RKE2_VERSION:-"v1.26.8+rke2r1"}
+RKE2_SERVER=${RKE2_SERVER:-}
+RKE2_TOKEN=${RKE2_TOKEN:-}
 
 function banner () {
-  echo "RKE2 agent installer -- github.com/aramcap"
+  echo "RKE2 agent installer -- github.com/aramcap/rancher"
 }
 
 function pre_flight() {
@@ -64,13 +64,13 @@ function pre_flight() {
   fi
 }
 
-function request_server_token() {
-if [[ -z "${RKE2_SERVER}" ]]; then
-  read -p "RKE2_SERVER: " RKE2_SERVER
-fi
-if [[ -z "${RKE2_TOKEN}" ]]; then
-  read -p "RKE2_TOKEN: " RKE2_TOKEN
-fi
+function get_params() {
+  if [[ -z "${RKE2_SERVER}" ]]; then
+    read -p "RKE2_SERVER: " RKE2_SERVER
+  fi
+  if [[ -z "${RKE2_TOKEN}" ]]; then
+    read -p "RKE2_TOKEN: " RKE2_TOKEN
+  fi
 }
 
 function install_rke2_agent() {
@@ -108,5 +108,5 @@ token: ${RKE2_TOKEN}" >> /etc/rancher/rke2/config.yaml
 
 banner
 pre_flight
-request_server_token
+get_params
 install_rke2_agent

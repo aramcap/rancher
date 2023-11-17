@@ -1,11 +1,23 @@
 #!/bin/bash
-RANCHER_VERSION="2.7.6"
-FQDN=""
-REPLICAS=1
-ADMINPASSWORD=rancherpassword
+RANCHER_VERSION=${RANCHER_VERSION:-"2.7.6"}
+FQDN=${FQDN:-}
+REPLICAS=${REPLICAS:-}
+ADMINPASSWORD=${ADMINPASSWORD:-}
 
 function banner () {
-  echo "Rancher installer -- github.com/aramcap"
+  echo "Rancher installer -- github.com/aramcap/rancher"
+}
+
+function get_params() {
+  if [[ -z "${FQDN}" ]]; then
+    read -p "FQDN: " FQDN
+  fi
+  if [[ -z "${REPLICAS}" ]]; then
+    read -p "REPLICAS: " REPLICAS
+  fi
+  if [[ -z "${ADMINPASSWORD}" ]]; then
+    read -p "ADMINPASSWORD: " ADMINPASSWORD
+  fi
 }
 
 function install_rancher(){
@@ -39,10 +51,5 @@ function install_rancher(){
 }
 
 banner
-
-echo "Rancher FQDN: "
-read FQDN
-echo "Rancher replicas: "
-read REPLICAS
-
+get_params
 install_rancher

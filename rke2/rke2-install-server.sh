@@ -1,11 +1,12 @@
 #!/bin/bash
 set -e
 
-RKE2_VERSION="v1.26.8+rke2r1"
-TLS_SAN=""
+RKE2_VERSION=${RKE2_VERSION:-"v1.26.8+rke2r1"}
+TLS_SAN=${TLS_SAN:-}
+CONTROL_PLANE_DEDICATED=${CONTROL_PLANE_DEDICATED:-true}
 
 function banner () {
-  echo "RKE2 server installer -- github.com/aramcap"
+  echo "RKE2 server installer -- github.com/aramcap/rancher"
 }
 
 function pre_flight() {
@@ -77,6 +78,11 @@ function install_rke2_server() {
     echo "tls-san:
   - \"${TLS_SAN}\"" > /etc/rancher/rke2/config.yaml
   fi
+  if [[ "${CONTROL_PLANE_DEDICATED}" == "true" ]]; then
+    echo "node-taint:
+  - \"CriticalAddonsOnly=true:NoExecute\"" > /etc/rancher/rke2/config.yaml
+  fi
+
 
   # start and enable service
   systemctl enable rke2-server.service
