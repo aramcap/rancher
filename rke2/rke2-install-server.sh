@@ -2,6 +2,8 @@
 set -e
 
 RKE2_VERSION=${RKE2_VERSION:-"v1.26.8+rke2r1"}
+RKE2_SERVER=${RKE2_SERVER:-}
+RKE2_TOKEN=${RKE2_TOKEN:-}
 TLS_SAN=${TLS_SAN:-}
 CONTROL_PLANE_DEDICATED=${CONTROL_PLANE_DEDICATED:-true}
 
@@ -74,6 +76,12 @@ function install_rke2_server() {
   # Create a configuration for RKE2
   mkdir -p /etc/rancher/rke2
   echo "write-kubeconfig-mode: \"0600\"" >> /etc/rancher/rke2/config.yaml
+  if [[ -n "${RKE2_SERVER}" ]]; then
+    echo "server: https://${RKE2_SERVER}:9345" > /etc/rancher/rke2/config.yaml
+  fi
+  if [[ -n "${RKE2_TOKEN}" ]]; then
+    echo "token: ${RKE2_TOKEN}" > /etc/rancher/rke2/config.yaml
+  fi
   if [[ -n "${TLS_SAN}" ]]; then
     echo "tls-san:
   - \"${TLS_SAN}\"" > /etc/rancher/rke2/config.yaml

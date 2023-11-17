@@ -84,7 +84,6 @@ function install_rke2_agent() {
   mkdir -p /etc/rancher/rke2
   echo "server: https://${RKE2_SERVER}:9345
 token: ${RKE2_TOKEN}" >> /etc/rancher/rke2/config.yaml
-!
 
   # start and enable service
   systemctl enable rke2-agent.service

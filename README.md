@@ -9,6 +9,8 @@ curl -sfL https://raw.githubusercontent.com/aramcap/rancher/main/rke2/rke2-insta
 
 Options:
 - RKE2_VERSION: defaults to v1.26.8+rke2r1
+- RKE2_SERVER: optional
+- RKE2_TOKEN: optional
 - TLS_SAN: optional
 - CONTROL_PLANE_DEDICATED: defaults to true
 
