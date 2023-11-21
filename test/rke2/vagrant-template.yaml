@@ -1,0 +1,17 @@
+# Vagrantfile generator
+# Adrian Ramos
+# https://github.com/aramcap/vagrantgen
+---
+- projectname: rke2test
+  provider: libvirt
+  vms:
+  - name: vm01
+    box: opensuse/Leap-15.5.x86_64
+    mem: 4096
+    cpu: 2
+    net:
+    - network: private_network
+      ip: 192.168.122.100
+    provision:
+    - provisioner: ansible
+      payload: "playbook.yml"
