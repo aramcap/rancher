@@ -41,3 +41,9 @@ curl -sfL https://raw.githubusercontent.com/aramcap/rancher/main/rke2/rke2-insta
 ```sh
 curl -sfL https://raw.githubusercontent.com/aramcap/rancher/main/rke2/rke2-install-server.sh | sh -
 ```
+
+## Longhorn
+
+```sh
+curl -sfL https://raw.githubusercontent.com/aramcap/rancher/main/longhorn/longhorn-deploy.sh | sh -
+```
